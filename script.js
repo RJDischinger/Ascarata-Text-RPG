@@ -10,9 +10,7 @@ let start = function() {
   }
   player();
   
-  //NEEDS WORK
-      alert('Hello ' + name);
-  
+
     //checks if the user has pressed the 'how to play button'
   let ifPlayerName = function() {
     parent = document.getElementById("container");
@@ -81,7 +79,7 @@ let ascarata = function() {
 
   //displays default header text upon visit
   let displayHeaderText = function() {
-    add_output.innerHTML += "You look around the village, it's on a grassy plain surrounded by overshadowing mountains from every side <br/>";
+    add_output.innerHTML += "You look around the village, it's modest town surrounded by rolling hills. <br/>";
   }
   displayHeaderText();
 
@@ -101,7 +99,7 @@ let ascarata = function() {
 // <================== Market FUNCTIONS ======================>
 
 //displays Market button
-theMarket = function() {
+marketArea = function() {
 
   if (firstAscartaVisit == 1) {
     document.getElementById("marketButton").style.display = "inline-block";
@@ -612,7 +610,49 @@ new Ability(1, "Ice Spear", "ice", 10, 2, 15, "You shot a spear of ice!"),
   new Ability(3, "Spikey Gloves", "item", 20, 10, 40, "*Spikey rubber noises*"),
   new Ability(4, "A Stick", "item", 40, 1, 45, "*wack wack wack*")
   ];
-// <================== ABILITIES ==================>
+
+
+// <================== OCCUPATIONS ==================>
+// just playing with a filter function for later use ... 
+console.log ("Filter test here");
+const occupation = ['Farmer', 'Rancher', 'Tavern Owner', 'Preacher'];
+let occupation01;
+occupation01 = occupation.filter(occupation => occupation.length <=10);
+console.log (occupation01);
+
+// <============FARMER OCCUPATION ==================>
+// Setting Crop Options
+const seeds = ['corn', 'beans', 'tobacco'];
+const capitalizedSeeds = seeds.map(seed => seed.toUpperCase());
+console.log(capitalizedSeeds);
+
+// Cost of seeds
+const costs = [2, 3.5, 5];
+const displayCosts = costs.map(cost => `$${cost.toFixed(2)}`);
+console.log(displayCosts)
+
+// Units of seeds purchased:
+// For FUN, this adds one unit of each seed type
+const total = costs.reduce((sum, cost) => sum + cost, 0);
+console.log(total);
+
+// Create a list, populate it with values, and retrieve at least one value for use in program
+const cornProducts = [
+  {name: "Corn Bread", productionTime: 2}, //in hours
+  {name: "Corn Meal Mush", productionTime: 1.5}, //in hours
+  {name: "Corn Flour", productionTime: 0.5}, //in hours
+  {name: "Corn Liquor", productionTime: 15}, //in hours
+  {name: "Corn Feed", productionTime: 0.25}, //in hours
+];
+
+const cornProdProd = cornProducts.map(cornProd => `${cornProd.name} takes ${cornProd.productionTime} hours to produce.`);
+
+console.log(cornProdProd);
+
+
+
+
+
 /*
 
 TO DO:
