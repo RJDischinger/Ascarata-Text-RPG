@@ -30,7 +30,7 @@ add_output = document.getElementById("game");
 
 //holds player locations visited
 let firstAscartaVisit = 0;
-var unlocked_battle = 0;
+let unlocked_battle = 0;
 
 //<==== PLAYER INFORMATION =====>
 let player = {
@@ -66,7 +66,19 @@ let ascarata = function() {
         "... <br/> " +
         "Off to the side of the path, is a sack of gold!<br/> You aquired 20 gold!<br><br>");
       
+  /*//<--- RAND EVENT ----->
+  randEvent = function() {
+    const doge = Math.floor(Math.random() * 100);
+    return doge;
+  };
+  let randEvent = randEvent();
 
+  if (firstAscartaVisit == 1) {
+    add_output.innerHTML += "<button style='padding: 2em;' class = 'gameButton' onClick = 'marketArea()'>You look around and something sparks your interest...</button> <br/>";
+
+    randEvent = -1;
+  } */
+      
       firstAscartaVisit += 1;
 
     }
@@ -84,7 +96,7 @@ let ascarata = function() {
   displayHeaderText();
 
   //<--- RAND EVENT ----->
-  randEvent = function() {
+ randEvent = function() {
     const doge = Math.floor(Math.random() * 100);
     return doge;
   };
@@ -96,6 +108,7 @@ let ascarata = function() {
     randEvent = -1;
   }
 
+  
 // <================== Market FUNCTIONS ======================>
 
 //displays Market button
@@ -649,8 +662,63 @@ const cornProdProd = cornProducts.map(cornProd => `${cornProd.name} takes ${corn
 
 console.log(cornProdProd);
 
+// <======================VENDOR STANDS ========================>
+let vendor = ("Farm Supplier", "Equipment Supplier", "Household Supplier")
+const purchaseItems = [
+    {
+        name: 'fertilizer',
+        vendor: 0,
+        price: 7.50
+    },
+    {
+        name: 'bread',
+        vendor: 2,
+        price: 1.50
+    },
+    {
+        name: 'pry bar',
+        vendor: 1,
+        price: 1.10
+    },
+    {
+        name: 'milk',
+        vendor: 2,
+        price: 0.30
+    },
+    {
+        name: 'eggs',
+        vendor: 2,
+        price: .20
+    },
+    {
+        name: 'overalls',
+        vendor: 2,
+        price: 5.00
+    },
+    {
+        name: 'plow blade',
+        vendor: 1,
+        price: 15.00
+    }
+  
+];
+let farmSupplyTotal;
+farmSupplyTotal = purchaseItems
+  .filter(total => total.vendor === 0)
+  .reduce((sum, total) => sum + total.price, 0);
+console.log("Farm Supply Total is : $", farmSupplyTotal);
 
+let equipmentTotal;
+equipmentTotal = purchaseItems
+  .filter(total => total.vendor === 1)
+  .reduce((sum, total) => sum + total.price, 0);
+console.log("Equipment Total is : $", equipmentTotal);
 
+let householdSupplyTotal;
+householdSupplyTotal = purchaseItems
+  .filter(total => total.vendor === 2)
+  .reduce((sum, total) => sum + total.price, 0);
+console.log("Household Total is : $", householdSupplyTotal);
 
 
 /*
