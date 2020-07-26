@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>CodePen - Text Based RPG</title>
   <link rel="stylesheet" href="./style.css">
 
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<body>
-  <div id = "container">
-    
-    <div id = "menu"> 
-      <button onClick = "ascarata()" id = "ascarataButton" class = "menuButton">Ascarata</button> 
-     <!-- <button onClick = "occupation()" id = "occupationButton" class = "menuButton">Occupation</button> -->
-      <button onClick = "market()" id = "marketButton" class = "menuButton">Market</button>
-      <button onClick = 'work()'id = "workButton" class = "menuButton">Work</button>
-      <button onClick = 'goodwill()'id = "goodwillButton" class = "menuButton">Goodwill</button>
-    </div>
-    
-    <div id = "game">
-      Welcome to the Game:   Check the "How to Play" Tab Below
+  <!-- partial:index.partial.html -->
+
+  <body>
+    <div id="container">
+
+      <div id="menu">
+        <button onClick="ascarata()" id="ascarataButton" class="menuButton">Ascarata</button>
+        <!-- <button onClick = "occupation()" id = "occupationButton" class = "menuButton">Occupation</button> -->
+        <button onClick="marketArea()" id="marketButton" class="menuButton">Market</button>
+        <button onClick='work()' id="workButton" class="menuButton">Home</button>
+        <button onClick='goodwill()' id="goodwillButton" class="menuButton">Goodwill</button>
+      </div>
+
+      <div id="game">
+        Welcome to the Game: Check the "How to Play" Tab Below
+      </div>
+
+      <button id="howTo" onClick="start()"
+        style="margin: auto; display: block; background-color: light blue; color: black">
+        How to Play
+      </button>
+      <br />
+      <button id="displayStats" onClick="displayStats()"
+        style="margin: auto; display: block; background-color: black; color: white">
+        PROFILE
+      </button>
+
     </div>
 
-    <button id = "howTo" onClick = "start()" style = "margin: auto; display: block; background-color: light blue; color: black">
-      How to Play
-    </button>
-    <br />
-    <button id="displayStats" onClick = "displayStats()" style = "margin: auto; display: block; background-color: black; color: white">
-      PROFILE
-    </button>
-    
-  </div>
-<body>
-<!-- partial -->
-  <script  src="./script.js"></script>
+    <body>
+      <!-- partial -->
+      <script src="./script.js"></script>
+    </body>
 
-</body>
 </html>
