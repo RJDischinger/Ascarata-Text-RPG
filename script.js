@@ -1,6 +1,6 @@
 //<==== PLAYER INFORMATION =====>
 let player = {
-  name: "",
+  name: "Player",
   location: "Ascarata",
   health: 100,
   skill: 2,
@@ -21,7 +21,7 @@ let start = function () {
     "Version: 1.0 - 2020_071620 <br/><br/>" +
     "~Items to be Accomplished~ <br/><br/>Choose Your Occupation <br/>Use the Market for Supplies <br/>Work to Build your Fortune <br>Do Goodwill to improve your Reputation<br/><br/> Now Select the Town of Ascarta Button");
 
-  player.name = prompt("Welcome ... What is your name?");
+//  player.name = prompt("Welcome ... What is your name?");
 
 
   //checks if the user has pressed the 'how to play button'
@@ -40,15 +40,15 @@ let output = function (txt) {
 };
 
 //clears text from game
-var clearGameWindow = function () {
+let clearGameWindow = function () {
   document.getElementById("game").innerHTML = "";
 };
 
-add_output = document.getElementById("game");
+addOutput = document.getElementById("game");
 
 //holds player locations visited
 let firstAscartaVisit = 0;
-let unlocked_battle = 0;
+//let unlocked_battle = 0;
 
 //<==== PLAYER INFORMATION =====>
 
@@ -56,8 +56,9 @@ let unlocked_battle = 0;
 let ascarata = function () {
   //clears the game screen upon visit
   let clearUponVisit = function () {
-    add_output.innerHTML = "";
+    addOutput.innerHTML = "";
     player.name = prompt("Welcome ... What is your name?");
+    /*
     let temp = prompt('Welcome ' + player.name + '!  Please enter an Email Address!');
     let validEmail = false;
     do {
@@ -69,8 +70,10 @@ let ascarata = function () {
         temp = prompt('Welcome ' + player.name + '!  Please enter an Email Address!');
       }
     } while (!validEmail);
+   */  
   }
   clearUponVisit();
+ 
 
   //runs the first time the player visits 'Ascarata'
   let checkFirstVisit = function () {
@@ -78,48 +81,56 @@ let ascarata = function () {
       player.money += 20;
       output("You arrive in the peacefull town of Ascarata<br/> " +
         "... <br/> " +
-        "Off to the side of the path, is a sack of gold!<br/> You aquired 20 gold!<br><br>");
+        "Off to the side of the path, is a sack of copper!<br/> You aquired 20 copper coins!<br><br>");
 
       firstAscartaVisit += 1;
-
     }
   }
   checkFirstVisit();
 
-  // setTimeout(function(){
-  //     output("You aquired 20 gold!<br><br>")
-  //      }, 4500); 
-
   //displays default header text upon visit
   let displayHeaderText = function () {
-    add_output.innerHTML += "You look around the village, it's modest town surrounded by rolling hills. <br/>";
+    addOutput.innerHTML += "You look around the village, it's modest town surrounded by rolling hills. <br/>";
   }
   displayHeaderText();
 
   if (firstAscartaVisit == 1) {
-    add_output.innerHTML += "<button style='padding: 2em;' class = 'gameButton' onClick = 'market()'>You look around and something sparks your interest...</button> <br/>";
+    //setTimeout(function(){
+    //output("What is that!<br><br>")
+    // }, 4500); 
+    addOutput.innerHTML += "<button style='padding: 2em;' class = 'gameButton' onClick = 'market()'>You find something that sparks your interest...</button> <br/>";
+}
 
-    // randEvent = -1;
-  }
+  /*
+  //displays Occupation button
+  occupation = function () {
+    if (firstAscartaVisit == 1) {
+      document.getElementById("occupationButton").style.display = "inline-block";
+      //firstAscartaVisit += 1;
+      clearGameWindow();
+      output("This town needs a Farmer, a Rancher, a Tavern Keeper, or a Preacher");
+
+     addOutput.innerHTML += ("<br><br> Choose Your Occupation");
+    }
+  };
+*/
 
 
   // <================== Market FUNCTIONS ======================>
 
   //displays Market button
   market = function () {
-
     if (firstAscartaVisit == 1) {
       document.getElementById("marketButton").style.display = "inline-block";
       firstAscartaVisit += 1;
-
       clearGameWindow();
 
       output("While walking through Ascarata, you find an open Market at the town center. <br/>" +
         "there are only a few vendors set up...");
 
-      add_output.innerHTML += "<br><br>~UPDATE~";
+      addOutput.innerHTML += "<br><br>~UPDATE~";
 
-      add_output.innerHTML += ("<br><br> You unlocked the Market!");
+      addOutput.innerHTML += ("<br><br> You unlocked the Market!");
     }
 
   };
@@ -169,11 +180,11 @@ let marketArea = function () {
       if (player.items.length >= 1 && unlocked_battle === 0) {
         document.getElementById("workButton").style.display = "inline-block";
 
-        add_output.innerHTML += "<br>~UPDATE~<br>";
-        add_output.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
-        // add_output.innerHTML += "<br>Time to use your new abilities....<br>";
-        // add_output.innerHTML += "<br>You make a note of the arena on your map!<br>";
-        unlocked_battle += 1;
+        addOutput.innerHTML += "<br>~UPDATE~<br>";
+        addOutput.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
+        // addOutput.innerHTML += "<br>Time to use your new abilities....<br>";
+        // add)utput.innerHTML += "<br>You make a note of the arena on your map!<br>";
+       // unlocked_battle += 1;
       }
     }
     checkPlayerAbilities();
@@ -195,7 +206,7 @@ let marketArea = function () {
         if (player.abilities[x].id == cornProducts[id].id) {
           //break is here so console doesn't log (can't property undefined);
           return false;
-          break;
+         break;
         }
       }
       return true;
@@ -210,7 +221,7 @@ let marketArea = function () {
 
     if (!checkIfOwned()) {
 
-      warning.innerHTML = "Sorry, you already own " + cornProducts[id].name;
+      warning.innerHTML = "You already bought this. " + cornProducts[id].name;
       allGood.innerHTML = "";
 
     } else if (!CanPurchase(player.money, cornProducts[id].cost)) {
@@ -232,15 +243,16 @@ let marketArea = function () {
     }
 
     var checkPlayerAbilities = function () {
-
-      if (player.items.length >= 1 && unlocked_battle === 0) {
+      
+      
+      if (player.items.length >= 1 && work === 0) {
         document.getElementById("workButton").style.display = "inline-block";
 
-        add_output.innerHTML += "<br>~UPDATE~<br>";
-        add_output.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
-        // add_output.innerHTML += "<br>Time to use your new abilities....<br>";
-        // add_output.innerHTML += "<br>You make a note of the arena on your map!<br>";
-        unlocked_battle += 1;
+        addOutput.innerHTML += "<br>~UPDATE~<br>";
+        addOutput.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
+        // addOutput.innerHTML += "<br>Time to use your new abilities....<br>";
+        // addOutput.innerHTML += "<br>You make a note of the arena on your map!<br>";
+        //unlocked_battle += 1;
       }
     }
     checkPlayerAbilities();
@@ -261,7 +273,7 @@ let CanPurchase = function (playerMoney, cost) {
 // <================== OCCUPATIONS ==================>
 // just playing with a filter function for later use ... 
 console.log("Filter test here");
-const occupation = ['Farmer', 'Rancher', 'Tavern Owner', 'Preacher'];
+const occupation = ['Farmer', 'Rancher', 'Tavern Keeper', 'Preacher'];
 let occupation01;
 occupation01 = occupation.filter(occupation => occupation.length <= 10);
 console.log(occupation01);
@@ -281,6 +293,18 @@ console.log(displayCosts)
 // For FUN, this adds one unit of each seed type
 const total = costs.reduce((sum, cost) => sum + cost, 0);
 console.log(total);
+
+// Create a list, populate it with values, and retrieve at least one value for use in program
+const cornSeeds = [
+  { name: "Dent Corn", growTime: 2, cost: 1 }, 
+  { name: "Sweet Corn", growTime: 1.5, cost: .8 }, 
+  { name: "Flint Corn", growTime: 0.5, cost: 2.8 }, 
+  { name: "Heirloom Corn", growTime: 5, cost: .3 }, 
+ ];
+
+const cornSeedGrow = cornSeeds.map(cornSeed => `${cornSeed.name} takes ${cornSeed.growTime} units to grow.`);
+
+console.log(cornSeedGrow);
 
 // Create a list, populate it with values, and retrieve at least one value for use in program
 const cornProducts = [
