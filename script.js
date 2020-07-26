@@ -1,10 +1,10 @@
 //<==== PLAYER INFORMATION =====>
 let player = {
   name: "",
-  location: "ascarata",
+  location: "Ascarata",
   health: 100,
   skill: 2,
-  money: 0,
+  money: 10,
   items: [],
   email: "",
 
