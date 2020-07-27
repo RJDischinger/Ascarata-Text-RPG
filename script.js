@@ -1,3 +1,5 @@
+console.clear() 
+
 //<==== PLAYER INFORMATION =====>
 let player = {
   name: "Player",
@@ -15,23 +17,46 @@ let player = {
   }
 };
 
+/*
+//Profile button
+displayStats = function() {
+  clearGameWindow();
+// let hold = [];
+//  for (var i = 0; i < player.abilities.length; i++) {
+//    hold.push(" " + player.abilities[i].name)
+//  };
+
+  output(
+    "Name:     " + player.name + "<br/>" +
+    "Location: " + player.location + "<br>" +
+    "Health:   " + player.health + "<br />"+
+    "Skill:    " + player.skill + "<br />"+
+    "Money:    " + player.money + "<br>" +
+    "Items:    " + [], + "<br />"+
+    "Email:    " + player.email + "<br>" +
+   );
+};
+*/
+
 let start = function () {
 
   output("~Text Based RPG~ <br/><br/+>" +
-    "Version: 1.0 - 2020_071620 <br/><br/>" +
+    "Version: 2.0 - 2020_072620 <br/><br/>" +
     "~Items to be Accomplished~ <br/><br/>Choose Your Occupation <br/>Use the Market for Supplies <br/>Work to Build your Fortune <br>Do Goodwill to improve your Reputation<br/><br/> Now Select the Town of Ascarta Button");
-
-//  player.name = prompt("Welcome ... What is your name?");
-
-
-  //checks if the user has pressed the 'how to play button'
+  
+//checks if the user has pressed the 'how to play button'
   let ifPlayerName = function () {
     parent = document.getElementById("container");
     child = document.getElementById("howTo");
-    parent.removeChild(child);
-  }
+    document.getElementById("howTo").style.color = "blue";
+    }
   ifPlayerName();
 };
+
+// "Blinks" button once as an alert.
+  function myFunction() {
+        setTimeout(function(){ }, )};
+    document.getElementById("howTo").style.color = "red";
 
 
 //sets variable output to the txt on screen
@@ -48,7 +73,7 @@ addOutput = document.getElementById("game");
 
 //holds player locations visited
 let firstAscartaVisit = 0;
-//let unlocked_battle = 0;
+let unlockedWork = 0;
 
 //<==== PLAYER INFORMATION =====>
 
@@ -90,7 +115,7 @@ let ascarata = function () {
 
   //displays default header text upon visit
   let displayHeaderText = function () {
-    addOutput.innerHTML += "You look around the village, it's modest town surrounded by rolling hills. <br/>";
+    addOutput.innerHTML += "You look around the village, it's modest town surrounded by rolling hills. <br><br><br/>";
   }
   displayHeaderText();
 
@@ -128,11 +153,9 @@ let ascarata = function () {
       output("While walking through Ascarata, you find an open Market at the town center. <br/>" +
         "there are only a few vendors set up...");
 
-      addOutput.innerHTML += "<br><br>~UPDATE~";
-
+      addOutput.innerHTML += "<br><br> *** ADVANCE ***";
       addOutput.innerHTML += ("<br><br> You unlocked the Market!");
     }
-
   };
 };
 
@@ -142,7 +165,6 @@ let work = function () {
   work.innerHTML = "<div id='work'>" + player.name + " went home to work in the fields with newly purchased items.</div>"
 }
 
-// <================== MARKET FUNCTIONS ======================>
 let marketArea = function () {
   //sets player location to marketArea
   if (player.location != 'marketArea') {
@@ -158,33 +180,30 @@ let marketArea = function () {
 
   if (player.location === 'marketArea') {
     let market = document.getElementById("game");
-    let items = cornProducts;
+    let items = seedOption;
 
     //display money
     market.innerHTML += "<div id ='shopMoney'>Money: " + player.money + "</div><br />";
 
 
-    //display each ability available
-    for (var x in cornProducts) {
+//display each product that is available
+    for (let x in seedOption) {
       //console.log(player.abilities[x]);
       if (player.items[x] == undefined) {
-        market.innerHTML += "   <button onclick='purchase(" + x + ")'style='padding: 0.3em; font-size: 80%; font-family: Monospace;'>" + items[x].name + "<br/> Production Time: " + items[x].productionTime + "<br/>Cost: " + items[x].cost + "</button>";
+        market.innerHTML += "   <button onclick='purchase(" + x + ")'style='padding: 0.3em; font-size: 80%; font-family: Monospace;'>" + items[x].name + "<br/> Production Time: " + items[x].growTime + "<br/>Cost: " + items[x].cost + "</button>";
       }
-
     }
 
 
-    //checks if the player own an ability - if so [battle] is unlocked!
-    var checkPlayerAbilities = function () {
+ //checks if the player owns an ability - if so [work] is unlocked!
+    let checkPlayerAbilities = function () {
 
-      if (player.items.length >= 1 && unlocked_battle === 0) {
+      if (player.items.length >= 1 && unlockedWork === 0) {
         document.getElementById("workButton").style.display = "inline-block";
-
-        addOutput.innerHTML += "<br>~UPDATE~<br>";
+        addOutput.innerHTML += "<br>*** ADVANCE ***<br>";
         addOutput.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
-        // addOutput.innerHTML += "<br>Time to use your new abilities....<br>";
-        // add)utput.innerHTML += "<br>You make a note of the arena on your map!<br>";
-       // unlocked_battle += 1;
+        // addOutput.innerHTML += "<br>Time to use your new products....<br>";
+        unlockedWork += 1;
       }
     }
     checkPlayerAbilities();
@@ -202,17 +221,16 @@ let marketArea = function () {
     //if player owns more than 1 ability - check and see if player already owns the ability
 
     checkIfOwned = function () {
-      for (var x in player.abilities) {
-        if (player.abilities[x].id == cornProducts[id].id) {
-          //break is here so console doesn't log (can't property undefined);
+      for (let x in player.abilities) {
+        if (player.abilities[x].id == seedOption[id].id) {       //break is here so console doesn't log (can't property undefined);
           return false;
-         break;
+          break;
         }
       }
       return true;
     };
     // checkMoney = function () {
-    //   if (player.money < cornProducts[id].cost) {
+    //   if (player.money < seedOption[id].cost) {
     //     return false;
     //   }
     //   return true;
@@ -221,28 +239,28 @@ let marketArea = function () {
 
     if (!checkIfOwned()) {
 
-      warning.innerHTML = "You already bought this. " + cornProducts[id].name;
+      warning.innerHTML = "You already bought this. " + seedOption[id].name;
       allGood.innerHTML = "";
 
-    } else if (!CanPurchase(player.money, cornProducts[id].cost)) {
-      warning.innerHTML = "Sorry you don't have enough money to purchase " + cornProducts[id].name;
+    } else if (!CanPurchase(player.money, seedOption[id].cost)) {
+      warning.innerHTML = "Sorry you don't have enough money to purchase " + seedOption[id].name;
       allGood.innerHTML = "";
     }
     else {
       //displays green text
-      allGood.innerHTML = "You purchased " + cornProducts[id].name
+      allGood.innerHTML = "You purchased " + seedOption[id].name
 
       //player.money - ability cost
-      player.money -= cornProducts[id].cost;
+      player.money -= seedOption[id].cost;
 
       //money updates
       shopMoney.innerHTML = "Money : " + player.money;
 
       //ability bought will push to player abilities
-      player.items.push(cornProducts[id]);
+      player.items.push(seedOption[id]);
     }
 
-    var checkPlayerAbilities = function () {
+    let checkPlayerAbilities = function () {
       
       
       if (player.items.length >= 1 && work === 0) {
@@ -250,13 +268,10 @@ let marketArea = function () {
 
         addOutput.innerHTML += "<br>~UPDATE~<br>";
         addOutput.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
-        // addOutput.innerHTML += "<br>Time to use your new abilities....<br>";
-        // addOutput.innerHTML += "<br>You make a note of the arena on your map!<br>";
-        //unlocked_battle += 1;
+        unlockedWork += 1;
       }
     }
     checkPlayerAbilities();
-
   }
 }
 
@@ -272,7 +287,7 @@ let CanPurchase = function (playerMoney, cost) {
 
 // <================== OCCUPATIONS ==================>
 // just playing with a filter function for later use ... 
-console.log("Filter test here");
+console.log("Filter test here : length < 10 ");
 const occupation = ['Farmer', 'Rancher', 'Tavern Keeper', 'Preacher'];
 let occupation01;
 occupation01 = occupation.filter(occupation => occupation.length <= 10);
@@ -280,9 +295,23 @@ console.log(occupation01);
 
 // <============FARMER OCCUPATION ==================>
 // Setting Crop Options
-const seeds = ['corn', 'beans', 'tobacco'];
-const capitalizedSeeds = seeds.map(seed => seed.toUpperCase());
+let seeds = ['corn', 'beans', 'tobacco'];
+let capitalizedSeeds = seeds.map(seed => seed.toUpperCase());
 console.log(capitalizedSeeds);
+
+
+// Create a list, populate it with values, and retrieve at least one value for use in program
+let seedOption = [
+  { name: "corn", growTime: 5, cost: 4 }, 
+  { name: "beans", growTime: 6, cost: 3 }, 
+  { name: "tobacco", growTime: 7, cost: 2 }, 
+ ];
+
+const seedOptionGrow = seedOption.map(seeds => `${seeds.name} takes ${seeds.growTime} units to grow.`);
+
+console.log(seedOptionGrow);
+
+
 
 // Cost of seeds
 const costs = [2, 3.5, 5];
@@ -294,17 +323,7 @@ console.log(displayCosts)
 const total = costs.reduce((sum, cost) => sum + cost, 0);
 console.log(total);
 
-// Create a list, populate it with values, and retrieve at least one value for use in program
-const cornSeeds = [
-  { name: "Dent Corn", growTime: 2, cost: 1 }, 
-  { name: "Sweet Corn", growTime: 1.5, cost: .8 }, 
-  { name: "Flint Corn", growTime: 0.5, cost: 2.8 }, 
-  { name: "Heirloom Corn", growTime: 5, cost: .3 }, 
- ];
-
-const cornSeedGrow = cornSeeds.map(cornSeed => `${cornSeed.name} takes ${cornSeed.growTime} units to grow.`);
-
-console.log(cornSeedGrow);
+// ....................Product converstion for future task ...
 
 // Create a list, populate it with values, and retrieve at least one value for use in program
 const cornProducts = [
@@ -318,6 +337,19 @@ const cornProducts = [
 const cornProdProd = cornProducts.map(cornProd => `${cornProd.name} takes ${cornProd.productionTime} hours to produce.`);
 
 console.log(cornProdProd);
+
+// Advanced selection to be used as skill level increases  ...
+const cornSeeds = [
+  { name: "Heirloom Corn", growTime: 5, cost: .3 },   
+  { name: "Dent Corn", growTime: 2, cost: 1 }, 
+  { name: "Sweet Corn", growTime: 1.5, cost: .8 }, 
+  { name: "Flint Corn", growTime: 0.5, cost: 2.8 }, 
+
+ ];
+
+const cornSeedGrow = cornSeeds.map(cornSeed => `${cornSeed.name} takes ${cornSeed.growTime} units to grow.`);
+
+console.log(cornSeedGrow);
 
 // <======================VENDOR STANDS ========================>
 let vendor = ("Farm Supplier", "Equipment Supplier", "Household Supplier")
