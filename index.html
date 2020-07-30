@@ -1,10 +1,23 @@
- <body>
-    <div id="container">
+ <!-- LOG IN FORM  -->
+<div id="hideLogin" class="page active">
+ <div class="login">
+   <h2 class="loginHeader">Log in</h2>
+     <form id="loginContainer">
+      <p><input type="name" placeholder="Name" required
+        minlength="4" maxlength="20"></p>
+      <p><input type="email" placeholder="Email"></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
+ </div>
+</div> 
+  
+<!-- Game Page  -->
+<div id="hideGame">
+  <div id="container">  </div>    <!-- ???This </div> breaks the form -->      
 
       <div id="menu">  
         <button onClick="ascarata()" id="ascarataButton" class="townButton">Ascarata</button>
-                 
-      <button onClick = "occupation()" id = "occupationButton" class = "menuButton">Occupation</button> 
+        <button onClick = "occupation()" id = "occupationButton" class = "menuButton">Occupation</button> 
         <button onClick="marketArea()" id="marketButton" class="menuButton">Market</button>
         <button onClick='work()' id="workButton" class="menuButton">Home</button>
         <button onClick='goodwill()' id="goodwillButton" class="menuButton">Goodwill</button>
@@ -23,8 +36,8 @@
         style="margin: auto; display: block; background-color: black; color: white">
         PROFILE
       </button>
-
     </div>
+</div>
 
     <body>
       <!-- partial -->
