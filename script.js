@@ -1,5 +1,41 @@
 console.clear() 
 
+// Show only Login Screen 
+document.getElementById("hideGame").style.display = "none";
+
+// <===== REQUIREMENT : Created a form and saved the respose to a test API  =====>
+window.addEventListener( "load", function () {
+  function sendData() {
+    const XHR = new XMLHttpRequest();
+    const formData = new FormData( form );
+
+    XHR.addEventListener( "load", function(event) {
+      alert( event.target.responseText );
+    } );
+
+    XHR.addEventListener( "error", function( event ) {
+      alert( 'Test example site used ...' );
+    } );
+
+    XHR.open( "POST", "https://example.com/cors.php" );
+    XHR.send( formData );
+  }
+ 
+  const form = document.getElementById( "loginContainer" );
+
+  form.addEventListener( "submit", function ( event ) {
+    event.preventDefault();
+
+    sendData();
+    console.log("Data has been sent.")
+    document.getElementById("hideLogin").style.display = "none";  
+    document.getElementById("hideGame").style.display = "block"; 
+         
+  } );
+   
+} );
+
+
 //<==== PLAYER INFORMATION =====>
 let player = {
   name: "Player",
@@ -10,13 +46,15 @@ let player = {
   items: [],
   email: "",
 
-  hasHealth: function () {
+// Health Function for later use
+hasHealth: function () {
     if (this.health < 0) {
       this.health = 0;
     }
   }
 };
 
+  
 /*
 //Profile button
 displayStats = function() {
@@ -49,6 +87,7 @@ let start = function () {
     parent = document.getElementById("container");
     child = document.getElementById("howTo");
     document.getElementById("howTo").style.color = "blue";
+    //parent.removeChild(child);
     }
   ifPlayerName();
 };
@@ -57,8 +96,7 @@ let start = function () {
   function myFunction() {
         setTimeout(function(){ }, )};
     document.getElementById("howTo").style.color = "red";
-
-
+  
 //sets variable output to the txt on screen
 let output = function (txt) {
   document.getElementById("game").innerHTML = txt;
@@ -82,20 +120,22 @@ let ascarata = function () {
   //clears the game screen upon visit
   let clearUponVisit = function () {
     addOutput.innerHTML = "";
-    player.name = prompt("Welcome ... What is your name?");
-    /*
-    let temp = prompt('Welcome ' + player.name + '!  Please enter an Email Address!');
-    let validEmail = false;
-    do {
-      var regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+//    player.name = prompt("Welcome ... What is your name?");
+    
+    const greeting = `Hello ${player.name}, <br/>`; 
+    output(greeting);
+
+ // <===== REQUIREMENT : Implement a regular expression (regex) to ensure a field :EMAIL: is displayed in same format 
+    let temp = prompt('Welcome ' + player.name + '!  Please enter your Email Address!');
+    let validEmail = false; do {
+      const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       if (regex.test(temp)) {
         validEmail = true;
       }
       else {
-        temp = prompt('Welcome ' + player.name + '!  Please enter an Email Address!');
+        temp = prompt('Welcome ' + player.name + '!  Please enter a valid Email Address!');
       }
     } while (!validEmail);
-   */  
   }
   clearUponVisit();
  
@@ -104,7 +144,7 @@ let ascarata = function () {
   let checkFirstVisit = function () {
     if (firstAscartaVisit === 0) {
       player.money += 20;
-      output("You arrive in the peacefull town of Ascarata<br/> " +
+      output("You arrive in the peaceful town of Ascarata<br/> " +
         "... <br/> " +
         "Off to the side of the path, is a sack of copper!<br/> You aquired 20 copper coins!<br><br>");
 
@@ -126,7 +166,7 @@ let ascarata = function () {
     addOutput.innerHTML += "<button style='padding: 2em;' class = 'gameButton' onClick = 'market()'>You find something that sparks your interest...</button> <br/>";
 }
 
-  /*
+ /*/***********************************************NOT WORKING *******
   //displays Occupation button
   occupation = function () {
     if (firstAscartaVisit == 1) {
@@ -134,11 +174,28 @@ let ascarata = function () {
       //firstAscartaVisit += 1;
       clearGameWindow();
       output("This town needs a Farmer, a Rancher, a Tavern Keeper, or a Preacher");
-
-     addOutput.innerHTML += ("<br><br> Choose Your Occupation");
+      addOutput.innerHTML += ("<br><br> Choose Your Occupation <br/>");
+      output(occupation01);
     }
   };
-*/
+  let occupationArea = function () {
+  //sets player location to occupationArea
+  if (player.location != 'occupationArea') {
+    player.location = 'occupationArea';
+  }
+
+  //if player location is set to 'occupationArea'  
+  console.log(player.location);
+
+  let occupation = document.getElementById("game");
+  const clearOccupation = function () { occupation.innerHTML = ""; }
+  clearOccupation();
+
+  if (player.location === 'occupationArea') {
+    let occupation = document.getElementById("game");
+    //let items = seedOption;
+
+//*****************************************************/
 
 
   // <================== Market FUNCTIONS ======================>
@@ -207,8 +264,8 @@ let marketArea = function () {
       }
     }
     checkPlayerAbilities();
-
   };
+  
 
   //make this here so it appears after the ability list
   game.innerHTML += "<br /><div style='font-size: 80%;' id = 'warning'></div>";
@@ -286,12 +343,13 @@ let CanPurchase = function (playerMoney, cost) {
 
 
 // <================== OCCUPATIONS ==================>
-// just playing with a filter function for later use ... 
+// <===== REQUIREMENT : Analyze text and display information about it ... 
 console.log("Filter test here : length < 10 ");
 const occupation = ['Farmer', 'Rancher', 'Tavern Keeper', 'Preacher'];
 let occupation01;
 occupation01 = occupation.filter(occupation => occupation.length <= 10);
 console.log(occupation01);
+// Display this information on screen when Occupation Button selected.
 
 // <============FARMER OCCUPATION ==================>
 // Setting Crop Options
@@ -300,7 +358,7 @@ let capitalizedSeeds = seeds.map(seed => seed.toUpperCase());
 console.log(capitalizedSeeds);
 
 
-// Create a list, populate it with values, and retrieve at least one value for use in program
+// <===== REQUIREMENT : Create a list, populate it with values, and retrieve at least one value for use in program
 let seedOption = [
   { name: "corn", growTime: 5, cost: 4 }, 
   { name: "beans", growTime: 6, cost: 3 }, 
@@ -308,7 +366,6 @@ let seedOption = [
  ];
 
 const seedOptionGrow = seedOption.map(seeds => `${seeds.name} takes ${seeds.growTime} units to grow.`);
-
 console.log(seedOptionGrow);
 
 
@@ -325,7 +382,7 @@ console.log(total);
 
 // ....................Product converstion for future task ...
 
-// Create a list, populate it with values, and retrieve at least one value for use in program
+// <===== REQUIREMENT : Create a list, populate it with values, and retrieve at least one value for use in program
 const cornProducts = [
   { name: "Corn Bread", productionTime: 2, cost: 5 }, //in hours
   { name: "Corn Meal Mush", productionTime: 1.5, cost: 5 }, //in hours
@@ -408,5 +465,47 @@ householdSupplyTotal = purchaseItems
   .filter(total => total.vendor === 2)
   .reduce((sum, total) => sum + total.price, 0);
 console.log("Household Total is : $", householdSupplyTotal);
+
+/*/**********************************************
+// Problem: We need a simple way to look at a user's badge count and JavaScript points
+// Solution: Use Node.js to connect to Treehouse's API to get profile information to print out
+
+//Require https module
+const https = require('https');
+const username = "chalkers";
+
+//Function to print message to console
+function printMessage(username, badgeCount, points) {
+  const message = `${username} has ${badgeCount} total badge(s) and ${points} points in JavaScript.` ;
+  console.log(message);
+}
+
+// Connect to the API URL (https://teamtreehouse.com/username.json)
+const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
+    let body = "";
+
+// Read the data
+response.on('data', data =>{
+  body += data.toString();
+});
+  
+  response.on('end', () => {
+  
+  // Parse the data
+              const profile = JSON.parse(body);
+  //console.dir(profile);
+              
+// Print the data
+  printMessage(username, profile.badges.length, profile.points.JavaScript);
+});
+
+});
+*/
+
+// add node.js ????
+//const https = require('https');
+//https.get('https://teamtreehouse.com/RJDischinger.json', function(response) {
+// console.log(response.statusCode);
+//});
 
 document.getElementById('game').style.overflow = 'hidden';
