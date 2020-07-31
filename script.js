@@ -341,7 +341,6 @@ let CanPurchase = function (playerMoney, cost) {
 }
 
 
-
 // <================== OCCUPATIONS ==================>
 // <===== REQUIREMENT : Analyze text and display information about it ... 
 console.log("Filter test here : length < 10 ");
@@ -367,7 +366,6 @@ let seedOption = [
 
 const seedOptionGrow = seedOption.map(seeds => `${seeds.name} takes ${seeds.growTime} units to grow.`);
 console.log(seedOptionGrow);
-
 
 
 // Cost of seeds
