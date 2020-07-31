@@ -143,10 +143,10 @@ let ascarata = function () {
   //runs the first time the player visits 'Ascarata'
   let checkFirstVisit = function () {
     if (firstAscartaVisit === 0) {
-      player.money += 20;
+      player.money += 2;
       output("You arrive in the peaceful town of Ascarata<br/> " +
         "... <br/> " +
-        "Off to the side of the path, is a sack of copper!<br/> You aquired 20 copper coins!<br><br>");
+        "Off to the side of the path, is a sack of copper!<br/> You aquired 2 copper coins!<br><br>");
 
       firstAscartaVisit += 1;
     }
