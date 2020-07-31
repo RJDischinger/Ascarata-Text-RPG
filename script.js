@@ -146,7 +146,7 @@ let ascarata = function () {
       player.money += 3;
       output("You arrive in the peaceful town of Ascarata<br/> " +
         "... <br/> " +
-        "Off to the side of the path, is a sack of copper!<br/> You aquired 3 copper coins!<br><br>");
+        "Off to the side of the path, something shimmers!<br/> You aquired 3 copper coins!<br><br>");
 
       firstAscartaVisit += 1;
     }
@@ -166,7 +166,7 @@ let ascarata = function () {
     addOutput.innerHTML += "<button style='padding: 2em;' class = 'gameButton' onClick = 'market()'>You find something that sparks your interest...</button> <br/>";
 }
 
- /*/***********************************************NOT WORKING *******
+ /*/**********************************************NEEDS WORK *******
   //displays Occupation button
   occupation = function () {
     if (firstAscartaVisit == 1) {
