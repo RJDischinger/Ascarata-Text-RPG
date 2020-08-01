@@ -217,6 +217,6 @@ body, html{
 }
 
 /* Hides buttons till they are ready for display */
-#occupationButton, #marketButton, #workButton, #goodwillButton {
+#occupationButton, #marketButton, #workButton, #reputationButton {
   display: none;
 }
