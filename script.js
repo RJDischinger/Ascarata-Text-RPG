@@ -14,10 +14,10 @@ window.addEventListener( "load", function () {
     } );
 
     XHR.addEventListener( "error", function( event ) {
-      alert( 'Test example site used ...' );
+      alert( 'Host site is not available ... but you may continue to Ascarata.' );
     } );
 
-    XHR.open( "POST", "https://example.com/cors.php" );
+    XHR.open( "POST", "http://localhost:5500/" );
     XHR.send( formData );
   }
  
