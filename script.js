@@ -10,8 +10,8 @@ window.addEventListener( "load", function () {
     const formData = new FormData( form );
 
     XHR.addEventListener( "load", function(event) {
-      alert( event.target.responseText );
-    } );
+      alert('You have arrived at Ascarata ...');
+      } );
 
     XHR.addEventListener( "error", function( event ) {
       alert( 'Host site is not available ... but you may continue to Ascarata.' );
