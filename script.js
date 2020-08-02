@@ -125,6 +125,7 @@ let ascarata = function () {
     const greeting = `Hello ${player.name}, <br/>`; 
     output(greeting);
 
+    /*   No longer needed .... crashes program if deleted  */
  // <===== REQUIREMENT : Implement a regular expression (regex) to ensure a field :EMAIL: is displayed in same format 
     let temp = prompt('Welcome ' + player.name + '!  Please enter your Email Address!');
     let validEmail = false; do {
@@ -137,8 +138,8 @@ let ascarata = function () {
       }
     } while (!validEmail);
   }
-  clearUponVisit();
- 
+    clearUponVisit();
+    
 
   //runs the first time the player visits 'Ascarata'
   let checkFirstVisit = function () {
