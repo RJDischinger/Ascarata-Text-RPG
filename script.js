@@ -255,7 +255,7 @@ let marketArea = function () {
  //checks if the player owns an ability - if so [work] is unlocked!
     let checkPlayerAbilities = function () {
 
-      if (player.items.length >= 1 && unlockedWork === 0) {
+      if (player.items.length >= 0 && unlockedWork === 0) {
         document.getElementById("workButton").style.display = "inline-block";
         addOutput.innerHTML += "<br>*** ADVANCE ***<br>";
         addOutput.innerHTML += "<br>After puchasing your materials you should head home to plant the products!<br>";
